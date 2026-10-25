@@ -1058,6 +1058,10 @@ h2 em {
     background: var(--white);
   }
 
+  .js .site-nav[hidden] {
+    display: none;
+  }
+
   .js .site-nav a {
     min-height: 3rem;
     margin: 0;

@@ -120,6 +120,7 @@ test("mobile navigation becomes an overlay only when JavaScript is available", a
   assert.match(css, /\.js\s+\.menu-button\s*\{[^}]*display:\s*inline-flex/s);
   assert.match(css, /\.site-nav\s*\{[^}]*position:\s*static[^}]*width:\s*100%/s);
   assert.match(css, /\.js\s+\.site-nav\s*\{[^}]*position:\s*absolute/s);
+  assert.match(css, /\.js\s+\.site-nav\[hidden\]\s*\{[^}]*display:\s*none/s);
 });
 
 test("the simplified prototype remains frontend-only and honestly disclosed", async () => {
