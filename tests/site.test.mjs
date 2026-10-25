@@ -44,3 +44,14 @@ test("the static page declares its stylesheet and browser module", async () => {
   assert.match(html, /href="\.\/styles\.css"/);
   assert.match(html, /src="\.\/app\.js"/);
 });
+
+test("the visual system protects LMU branding and essential accessibility modes", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
+  assert.match(css, /--crimson:\s*#ab0c2f/i);
+  assert.match(css, /--blue:\s*#0076a5/i);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
+});
