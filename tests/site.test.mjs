@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { getMenuState, getNextExpanded } from "../dist/app.js";
 
 const projectUrl = new URL("../", import.meta.url);
 
@@ -54,4 +55,14 @@ test("the visual system protects LMU branding and essential accessibility modes"
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
   assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
+});
+
+test("FAQ state always toggles to the opposite expanded value", () => {
+  assert.equal(getNextExpanded(false), true);
+  assert.equal(getNextExpanded(true), false);
+});
+
+test("menu state keeps the button and navigation visibility synchronized", () => {
+  assert.deepEqual(getMenuState(false), { expanded: "false", hidden: true });
+  assert.deepEqual(getMenuState(true), { expanded: "true", hidden: false });
 });
