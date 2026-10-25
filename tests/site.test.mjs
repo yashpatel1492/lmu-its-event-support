@@ -46,15 +46,34 @@ test("the static page declares its stylesheet and browser module", async () => {
   assert.match(html, /src="\.\/app\.js"/);
 });
 
-test("the visual system protects LMU branding and essential accessibility modes", async () => {
+test("the page uses the official LMU ITS masthead and utility shell", async () => {
+  const html = await readProjectFile("dist/index.html");
+
+  assert.match(html, /class="[^"]*masthead[^"]*"/);
+  assert.match(html, /src="\.\/lmu-lockup\.svg"/);
+  assert.match(html, /https:\/\/its\.lmu\.edu\/media\/its\/BluffPanorama%20\(1\)\.jpg/);
+  assert.match(html, /href="https:\/\/www\.lmu\.edu\/apply\/"[^>]*>Apply</);
+  assert.match(html, /href="https:\/\/www\.lmu\.edu\/visit\/"[^>]*>Visit</);
+  assert.match(html, /href="https:\/\/giving\.lmu\.edu\/"[^>]*>Give</);
+  assert.match(html, /Information Technology Services/);
+});
+
+test("the visual system follows the measured LMU ITS design tokens", async () => {
   const css = await readProjectFile("dist/styles.css");
 
   assert.match(css, /--crimson:\s*#ab0c2f/i);
   assert.match(css, /--blue:\s*#0076a5/i);
+  assert.match(css, /--content:\s*64rem/i);
+  assert.match(css, /--footer:\s*#f3f3f3/i);
+  assert.match(css, /--corner:\s*0(?:px)?\s*;/i);
+  assert.match(css, /@font-face\s*\{[^}]*font-family:\s*["']?Metric/i);
+  assert.match(css, /MetricWeb-Regular\.woff/i);
+  assert.match(css, /font-family:\s*Metric,\s*Arial,\s*sans-serif/i);
   assert.match(css, /:focus-visible/);
-  assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(css, /@media\s*\(min-width:\s*64em\)/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
   assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
+  assert.doesNotMatch(css, /border-radius:\s*(?:[1-9]|0\.[1-9])/i);
 });
 
 test("FAQ state always toggles to the opposite expanded value", () => {
@@ -75,8 +94,15 @@ test("mobile navigation becomes an overlay only when JavaScript is available", a
   assert.match(css, /\.js\s+\.site-nav\s*\{[^}]*position:\s*absolute/s);
 });
 
-test("body copy on blue benefit cards uses fully opaque white", async () => {
-  const css = await readProjectFile("dist/styles.css");
+test("the simplified prototype remains frontend-only and honestly disclosed", async () => {
+  const [html, packageJson] = await Promise.all([
+    readProjectFile("dist/index.html"),
+    readProjectFile("package.json"),
+  ]);
 
-  assert.match(css, /\.benefit-card--blue\s*>\s*p\s*\{[^}]*color:\s*var\(--white\)/s);
+  assert.doesNotMatch(html, /<form\b/i);
+  assert.doesNotMatch(html, /<(?:iframe|video)\b/i);
+  assert.doesNotMatch(packageJson, /"dependencies"\s*:/);
+  assert.match(html, /Prototype recruitment experience for review/i);
+  assert.match(html, /Final content and publication require LMU approval/i);
 });
