@@ -54,11 +54,20 @@ test("the page uses the official LMU ITS masthead and utility shell", async () =
 
   assert.match(html, /class="[^"]*masthead[^"]*"/);
   assert.match(html, /src="\.\/lmu-lockup\.svg"/);
-  assert.match(html, /https:\/\/its\.lmu\.edu\/media\/its\/BluffPanorama%20\(1\)\.jpg/);
+  assert.doesNotMatch(html, /BluffPanorama|masthead__image/i);
   assert.match(html, /href="https:\/\/www\.lmu\.edu\/apply\/"[^>]*>Apply</);
   assert.match(html, /href="https:\/\/www\.lmu\.edu\/visit\/"[^>]*>Visit</);
   assert.match(html, /href="https:\/\/giving\.lmu\.edu\/"[^>]*>Give</);
   assert.match(html, /Information Technology Services/);
+});
+
+test("the editorial masthead and hero use no photography", async () => {
+  const html = await readProjectFile("dist/index.html");
+
+  assert.doesNotMatch(html, /BluffPanorama|masthead__image|<img[^>]+\.(?:jpe?g|png|webp)/i);
+  assert.match(html, /class="masthead__brand"[^>]*>[\s\S]*src="\.\/lmu-lockup\.svg"/);
+  assert.match(html, /class="hero__summary"/);
+  assert.match(html, /class="hero__signals"/);
 });
 
 test("the visual system follows the measured LMU ITS design tokens", async () => {
