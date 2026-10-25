@@ -66,3 +66,17 @@ test("menu state keeps the button and navigation visibility synchronized", () =>
   assert.deepEqual(getMenuState(false), { expanded: "false", hidden: true });
   assert.deepEqual(getMenuState(true), { expanded: "true", hidden: false });
 });
+
+test("mobile navigation becomes an overlay only when JavaScript is available", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
+  assert.match(css, /\.js\s+\.menu-button\s*\{[^}]*display:\s*inline-flex/s);
+  assert.match(css, /\.site-nav\s*\{[^}]*position:\s*static[^}]*width:\s*100%/s);
+  assert.match(css, /\.js\s+\.site-nav\s*\{[^}]*position:\s*absolute/s);
+});
+
+test("body copy on blue benefit cards uses fully opaque white", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
+  assert.match(css, /\.benefit-card--blue\s*>\s*p\s*\{[^}]*color:\s*var\(--white\)/s);
+});

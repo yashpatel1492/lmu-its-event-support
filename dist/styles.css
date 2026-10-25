@@ -869,10 +869,13 @@ h2 em {
 }
 
 .benefit-card--crimson .benefit-card__index,
-.benefit-card--blue .benefit-card__index,
+.benefit-card--blue .benefit-card__index {
+  color: rgb(255 255 255 / 76%);
+}
+
 .benefit-card--crimson > p,
 .benefit-card--blue > p {
-  color: rgb(255 255 255 / 76%);
+  color: var(--white);
 }
 
 .benefit-card--crimson .benefit-card__icon,
@@ -1481,8 +1484,11 @@ h2 em {
     --page: min(100% - 40px, 720px);
   }
 
+  .site-header {
+    flex-wrap: wrap;
+  }
+
   .menu-button {
-    display: inline-flex;
     align-items: center;
     gap: 12px;
     padding: 8px;
@@ -1490,6 +1496,10 @@ h2 em {
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  .js .menu-button {
+    display: inline-flex;
   }
 
   .menu-button__icon {
@@ -1516,16 +1526,23 @@ h2 em {
   }
 
   .site-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
+    position: static;
+    width: 100%;
+    order: 3;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0;
     padding: 0 24px 24px;
     border-bottom: 1px solid var(--line);
     background: var(--paper);
+  }
+
+  .js .site-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    width: auto;
   }
 
   .js .site-nav[hidden] {
