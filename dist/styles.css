@@ -2133,7 +2133,7 @@ body::before {
 
 .eyebrow,
 .section-kicker {
-  gap: 0;
+  gap: 0.6rem;
   margin-bottom: 0.9rem;
   color: var(--crimson);
   font-size: 0.75rem;

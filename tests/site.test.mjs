@@ -80,6 +80,15 @@ test("the visual system follows the measured LMU ITS design tokens", async () =>
   assert.doesNotMatch(css, /\.button\s*\{[^}]*box-shadow:/s);
 });
 
+test("official-style section labels keep their number and title visually separated", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
+  assert.match(
+    css,
+    /\/\* Official LMU ITS template alignment \*\/[\s\S]*?\.eyebrow,\s*\.section-kicker\s*\{[^}]*gap:\s*0\.6rem/s,
+  );
+});
+
 test("FAQ state always toggles to the opposite expanded value", () => {
   assert.equal(getNextExpanded(false), true);
   assert.equal(getNextExpanded(true), false);
