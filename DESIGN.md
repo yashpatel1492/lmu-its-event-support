@@ -1,8 +1,8 @@
-# LMU ITS Event Support — Official-Site Restyle
+# LMU ITS Event Support — Editorial No-Photo System
 
 ## Direction
 
-Recast the existing student recruitment page as a natural member of Loyola Marymount University's current ITS web ecosystem. The result should feel professional, elegant, simple, and institutionally credible—not like a separate marketing campaign.
+Recast the student recruitment page as a polished, typography-led member of Loyola Marymount University's ITS web ecosystem. The result should feel professional, elegant, simple, and institutionally credible without using photography or illustration-heavy decoration.
 
 ## Source references
 
@@ -11,7 +11,7 @@ Recast the existing student recruitment page as a natural member of Loyola Marym
 - Core stylesheet observed on the official site: https://cdn.lmudigital.io/terminalfour/styles/devcore.css
 - ITS template stylesheet: https://its.lmu.edu/media/2019lmu/siteassets/css/main-logo-testing.css
 - ITS template refinements: https://its.lmu.edu/media/2019lmu/siteassets/css/t4-style-updates.css
-- Masthead panorama: https://its.lmu.edu/media/its/BluffPanorama%20(1).jpg
+- The official site's panorama treatment was inspected as layout evidence, but the approved implementation deliberately uses no photography.
 
 ## Visual system
 
@@ -35,7 +35,7 @@ Recast the existing student recruitment page as a natural member of Loyola Marym
 
 ### Layout and spacing
 
-- Full-width campus panorama masthead with the LMU lockup over a dark top fade.
+- Solid-crimson identity masthead with the white LMU lockup and a crisp white utility block.
 - Desktop content column: approximately 1024px inside a 1280px viewport, matching the measured official ITS page.
 - Page sections use generous white space and simple separators rather than colored panels.
 - A compact two-column rhythm may be used for recruitment content, but every module should look like a restrained LMU template component.
@@ -43,7 +43,7 @@ Recast the existing student recruitment page as a natural member of Loyola Marym
 
 ### Header and navigation
 
-- Place the LMU lockup at the upper left of the panorama.
+- Place the LMU lockup at the upper left of the crimson identity band.
 - Place Apply, Visit, Give, Menu, and Search controls in a white utility block at the upper right on wide screens.
 - Retain recruitment navigation in a clean white department bar directly beneath the masthead.
 - On narrow screens, collapse the recruitment navigation behind the existing accessible menu button.
@@ -64,13 +64,13 @@ Recast the existing student recruitment page as a natural member of Loyola Marym
 
 ## Asset guidance
 
-- Reuse the official ITS Bluff Panorama image as the masthead reference asset.
-- Use a faithful local SVG rendition of the official LMU lockup derived from the live official header, retaining the crimson, cyan, and white brand colors.
-- Do not reuse unrelated ITS service-tile imagery or homepage news photography.
+- Use no photography or raster imagery.
+- Keep a faithful local SVG rendition of the official LMU lockup derived from the live official header.
+- Build visual interest with typography, spacing, rules, and the LMU crimson/cyan palette instead of decorative images.
 
 ## Fidelity boundary
 
-Exact: primary colors, Metric typography, square corners, masthead composition, utility navigation pattern, desktop content width, button styling, responsive breakpoint logic, and footer tone.
+Exact: primary colors, Metric typography, square corners, utility navigation pattern, desktop content width, button styling, responsive breakpoint logic, and footer tone.
 
-Adapted: body section content and arrangement are tailored to student recruitment; global LMU mega-menu destinations are represented without reproducing the complete university navigation system; the footer is intentionally concise for a private prototype.
+Adapted: the official photograph masthead becomes a solid-crimson identity band; body section content and arrangement are tailored to student recruitment; global LMU mega-menu destinations are represented without reproducing the complete university navigation system; the footer is intentionally concise for a private prototype.
 
