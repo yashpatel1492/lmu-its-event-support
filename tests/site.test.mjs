@@ -70,42 +70,38 @@ test("the editorial masthead and hero use no photography", async () => {
   assert.match(html, /class="hero__signals"/);
 });
 
-test("the visual system follows the measured LMU ITS design tokens", async () => {
+test("the stylesheet is a single no-photo editorial system", async () => {
   const css = await readProjectFile("dist/styles.css");
 
   assert.match(css, /--crimson:\s*#ab0c2f/i);
   assert.match(css, /--blue:\s*#0076a5/i);
   assert.match(css, /--content:\s*64rem/i);
-  assert.match(css, /--footer:\s*#f3f3f3/i);
+  assert.match(css, /--footer:\s*#f1f1f1/i);
   assert.match(css, /--corner:\s*0(?:px)?\s*;/i);
   assert.match(css, /@font-face\s*\{[^}]*font-family:\s*["']?Metric/i);
   assert.match(css, /MetricWeb-Regular\.woff/i);
   assert.match(css, /font-family:\s*Metric,\s*Arial,\s*sans-serif/i);
+  assert.match(css, /\.masthead\s*\{[^}]*background:\s*var\(--crimson\)/s);
+  assert.match(css, /\.hero\s*\{[^}]*grid-template-columns:/s);
+  assert.match(css, /body\s*\{[^}]*color:\s*var\(--ink\)/s);
+  assert.match(css, /\.connections\s*\{[^}]*background:\s*var\(--blue\)[^}]*color:\s*var\(--white\)/s);
+  assert.match(css, /\.button\s*\{[^}]*border-radius:\s*var\(--corner\)/s);
+  assert.doesNotMatch(css, /Official LMU ITS template alignment|background-image:\s*url\(/i);
+  assert.doesNotMatch(css, /box-shadow\s*:/i);
+});
+
+test("the editorial system keeps responsive and accessible fallbacks", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
   assert.match(css, /:focus-visible/);
+  assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
+  assert.match(css, /@media\s*\(max-width:\s*47\.99em\)/);
   assert.match(css, /@media\s*\(min-width:\s*64em\)/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
-  assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
-  assert.match(css, /\.button\s*\{[^}]*border-radius:\s*var\(--corner\)/s);
-  assert.doesNotMatch(css, /\.button\s*\{[^}]*box-shadow:/s);
-});
-
-test("official-style section labels keep their number and title visually separated", async () => {
-  const css = await readProjectFile("dist/styles.css");
-
-  assert.match(
-    css,
-    /\/\* Official LMU ITS template alignment \*\/[\s\S]*?\.eyebrow,\s*\.section-kicker\s*\{[^}]*gap:\s*0\.6rem/s,
-  );
-});
-
-test("the light join section overrides every legacy light-on-dark text color", async () => {
-  const css = await readProjectFile("dist/styles.css");
-
-  assert.match(css, /\.join h2 em\s*\{[^}]*color:\s*var\(--blue\)/s);
-  assert.match(css, /\.join__action > p\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
-  assert.match(css, /\.join__facts span\s*\{[^}]*color:\s*var\(--crimson\)/s);
-  assert.match(css, /\.join__facts p\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
-  assert.match(css, /\.faq__intro > p:last-child\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
+  assert.match(css, /\.site-nav\s*\{[^}]*position:\s*static[^}]*width:\s*100%/s);
+  assert.match(css, /\.js\s+\.site-nav\s*\{[^}]*position:\s*absolute/s);
+  assert.match(css, /\.faq__answer\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
+  assert.match(css, /\.join__action > p[\s\S]*?color:\s*var\(--ink-soft\)/s);
 });
 
 test("FAQ state always toggles to the opposite expanded value", () => {
