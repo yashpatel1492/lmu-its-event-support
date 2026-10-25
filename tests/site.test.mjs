@@ -89,6 +89,16 @@ test("official-style section labels keep their number and title visually separat
   );
 });
 
+test("the light join section overrides every legacy light-on-dark text color", async () => {
+  const css = await readProjectFile("dist/styles.css");
+
+  assert.match(css, /\.join h2 em\s*\{[^}]*color:\s*var\(--blue\)/s);
+  assert.match(css, /\.join__action > p\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
+  assert.match(css, /\.join__facts span\s*\{[^}]*color:\s*var\(--crimson\)/s);
+  assert.match(css, /\.join__facts p\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
+  assert.match(css, /\.faq__intro > p:last-child\s*\{[^}]*color:\s*var\(--ink-soft\)/s);
+});
+
 test("FAQ state always toggles to the opposite expanded value", () => {
   assert.equal(getNextExpanded(false), true);
   assert.equal(getNextExpanded(true), false);
