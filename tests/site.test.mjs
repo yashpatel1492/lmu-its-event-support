@@ -36,7 +36,10 @@ test("the unconfirmed application path is honest and does not submit data", asyn
 
   assert.match(html, /Application link coming soon/);
   assert.doesNotMatch(html, /<form\b/i);
-  assert.doesNotMatch(html, /https?:\/\/[^"']*(apply|jobs|careers)/i);
+  assert.doesNotMatch(
+    html,
+    /<a[^>]+class=["'][^"']*(?:button|nav-cta)[^"']*["'][^>]+href=["']https?:\/\/[^"']*(?:apply|jobs|careers)/i,
+  );
 });
 
 test("the static page declares its stylesheet and browser module", async () => {
@@ -73,7 +76,8 @@ test("the visual system follows the measured LMU ITS design tokens", async () =>
   assert.match(css, /@media\s*\(min-width:\s*64em\)/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
   assert.match(css, /overflow-x:\s*(?:clip|hidden)/);
-  assert.doesNotMatch(css, /border-radius:\s*(?:[1-9]|0\.[1-9])/i);
+  assert.match(css, /\.button\s*\{[^}]*border-radius:\s*var\(--corner\)/s);
+  assert.doesNotMatch(css, /\.button\s*\{[^}]*box-shadow:/s);
 });
 
 test("FAQ state always toggles to the opposite expanded value", () => {

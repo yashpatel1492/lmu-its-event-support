@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 94" role="img" aria-labelledby="title desc">
+  <title id="title">LMU</title>
+  <desc id="desc">Loyola Marymount University shield and LMU lettermark</desc>
+  <path fill="#fff" d="M5 4h82v43c0 21-9 32-20 41L46 92 25 78C13 69 5 55 5 38V4Z"/>
+  <path fill="#0076a5" d="M9 8h35v34H9V8Zm39 0h35v34H48V8Z"/>
+  <path fill="#ab0c2f" d="M9 46h74v1c0 17-7 27-18 35L46 88 27 75C16 67 9 56 9 42v4Z"/>
+  <path fill="#fff" d="M23 16h17v4H23zm6-5h4v17h-4zm28 1 3 7 7-3-4 7 7 3-7 3 4 7-7-3-3 7-3-7-7 3 4-7-7-3 7-3-4-7 7 3 3-7Z"/>
+  <circle cx="46" cy="60" r="10" fill="#fff"/>
+  <path fill="#ab0c2f" d="m46 47 3 8 8-3-4 8 8 3-8 3 4 8-8-3-3 8-3-8-8 3 4-8-8-3 8-3-4-8 8 3 3-8Z"/>
+  <path fill="#fff" d="M112 18h22v52h43v19h-65V18Zm78 0h22l26 39 26-39h21v71h-22V53l-25 36h-1l-25-36v36h-22V18Zm111 0h22v41c0 9 3 14 10 14s10-5 10-14V18h22v44c0 20-12 29-32 29s-32-9-32-29V18Z"/>
+</svg>
