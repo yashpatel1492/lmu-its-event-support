@@ -9,6 +9,10 @@ async function readProjectFile(path) {
   return readFile(new URL(path, projectUrl), "utf8");
 }
 
+async function readProjectBuffer(path) {
+  return readFile(new URL(path, projectUrl));
+}
+
 test("the recruitment journey keeps every planned destination addressable", async () => {
   const html = await readProjectFile("dist/index.html");
   const sectionIds = ["about", "role", "learn", "connect", "grow", "stories", "join"];
@@ -53,7 +57,9 @@ test("the page uses the official LMU ITS masthead and utility shell", async () =
   const html = await readProjectFile("dist/index.html");
 
   assert.match(html, /class="[^"]*masthead[^"]*"/);
-  assert.match(html, /src="\.\/lmu-lockup\.svg"/);
+  assert.match(html, /src="\.\/lmu-university-logo\.png"/);
+  assert.match(html, /class="masthead__logo-frame"/);
+  assert.match(html, /class="masthead__wordmark"[^>]*>\s*<strong>LMU<\/strong>/);
   assert.doesNotMatch(html, /BluffPanorama|masthead__image/i);
   assert.match(html, /href="https:\/\/www\.lmu\.edu\/apply\/"[^>]*>Apply</);
   assert.match(html, /href="https:\/\/www\.lmu\.edu\/visit\/"[^>]*>Visit</);
@@ -63,11 +69,20 @@ test("the page uses the official LMU ITS masthead and utility shell", async () =
 
 test("the editorial masthead and hero use no photography", async () => {
   const html = await readProjectFile("dist/index.html");
+  const imageSources = [...html.matchAll(/<img[^>]+src="([^"]+)"/gi)].map((match) => match[1]);
 
-  assert.doesNotMatch(html, /BluffPanorama|masthead__image|<img[^>]+\.(?:jpe?g|png|webp)/i);
-  assert.match(html, /class="masthead__brand"[^>]*>[\s\S]*src="\.\/lmu-lockup\.svg"/);
+  assert.doesNotMatch(html, /BluffPanorama|masthead__image/i);
+  assert.deepEqual(imageSources, ["./lmu-university-logo.png"]);
   assert.match(html, /class="hero__summary"/);
   assert.match(html, /class="hero__signals"/);
+});
+
+test("the supplied high-resolution LMU logo is packaged with the site", async () => {
+  const png = await readProjectBuffer("dist/lmu-university-logo.png");
+
+  assert.equal(png.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(png.readUInt32BE(16), 4063);
+  assert.equal(png.readUInt32BE(20), 1166);
 });
 
 test("the stylesheet is a single no-photo editorial system", async () => {
